@@ -5,15 +5,15 @@ Today only look at Élements in the selector.
 ## Intro
 Web scraping - in the past people just view page source code of the website  
 <ol type="1"style="list-style-position:inside;">
-1.Pick a page
-2.Load a page
-3.Look at page
-4.Determine where the info was
-5.Select it
-6.Copy
-7.New file
-8.Paste
-9.Save
+1. Pick a page
+2. Load a page
+3. Look at page
+4. Determine where the info was
+5. Select it
+6. Copy
+7. New file
+8. Paste
+9. Save  
 
 ## Tools
 Download Chrome CSS Gadget Selector
