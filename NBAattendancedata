@@ -1,0 +1,45 @@
+library(rvest)
+
+nba_url <- 'http://www.espn.com/nba/attendance'
+nba_html <- read_html(nba_url)
+#you have to highlight the first function/variable and the ctrl+enter
+
+nba_attendance <- nba_html %>%
+  html_node('.tablehead') %>%
+  html_table()
+#Environment tab > Global Environment tab > Data > nba_attendance > click on the table sign > data will appear on a new window
+
+nba_root_url <- 'http://www.espn.com/nba/attendance/_/year/'
+
+#how to create our sequence of number? sequence, list, or?
+
+#backup plan 1 :years <- seq (2001,2017)
+#Wouldn't it be better if we go to the page and where the drop down menu are the years, can't we inspect the source code and use selector gadget to grab that??
+
+#nba_html %>%
+ # html_node('.tablesm') %>%
+ # html_form()
+#it doesn't work :-( Solution: need to find selector for each of the function?
+
+years_url <- nba_html %>%
+  html_node('.tablesm') %>%
+  html_children() %>%
+  html_attr('value')
+
+nba_years <- data.frame()
+
+# for (year_url in years_url){
+#   read_html(year_url)%>%
+#     html_node('.tablehead') %>%
+#     html_table()
+# } but doesn't work
+
+for(year_url in years_url){
+  year_url <- paste0('http:', year_url)
+  nba_year_data <- read_html(year_url) %>%
+    html_node('.tablehead') %>%
+    html_table() 
+  
+  nba_years <- rbind(nba_years, nba_year_data)
+}
+
