@@ -1,0 +1,32 @@
+library(rvest)
+#This library has its own programming library
+#This is to load an existing library
+#Ctrl+Enter to run each part
+
+depts_url <- 'http://www.houstontx.gov/departments.html'
+# <- symbol is to tell it to hold the url onto the depts_url
+
+depts_html <- read_html(depts_url)
+
+depts_email <- depths_html %>%
+  # %>% piping to pass this function to the next, allows you to see what happens first and it is better. It only comes with rvest.
+
+#read_html(depts_url) %>%
+#to ask R to read html from depts_url in which we assigned the url to
+  #html_node('.table150 a') will only run one node so...
+  #html_nodes('.table150 a')
+  html_nodes('.table150 a:nth-child(1), .table150 a:nth-child(3)') %>%
+  html_attr('href')
+#to anchor the class that we want to pull out
+
+  #html_text()
+  #html_attr('href')
+  #href is hyperlink reference which appears in front of the email
+  #if I type html_attr('id') then click CTRL+Enter will return NA NA NA means nothing
+
+fileConn <- file("output.txt")
+writeLines(depts_emails, fileConn)
+close(fileConn)
+#so it knows we are done writing to it
+# or (otherintinging(html_node(read_html(depts_url))))  
+
